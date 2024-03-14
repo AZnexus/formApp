@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { of } from 'rxjs';
 
 const defaultValues = {
   name: 'Default Product',
@@ -26,9 +27,34 @@ export class BasicPageComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-    ngOnInit(): void {
-      // this.myForm.reset(defaultValues);
+  ngOnInit(): void {
+    // this.myForm.reset(defaultValues);
+  }
+
+  /**
+   * Implementació generica per revisar si el camp es valid
+   * @param field
+   * @returns
+   */
+  isValidField(field: string): boolean | null {
+    return this.myForm.controls[field].errors && this.myForm.controls[field].touched;
+  }
+
+  getFieldError(field: string): string | null {
+
+    if ( !this.myForm.controls[field] ) return null;
+
+    const errors = this.myForm.controls[field].errors || {};
+
+    for (const key of Object.keys(errors)) {
+      switch(key) {
+        case 'required': return 'Este campo es requerido';
+        case 'minlength': return `Mínimo de ${ errors['minlength'].requiredLength } caracteres`;
+      }
     }
+
+    return 'TEST';
+  }
 
   onSave(): void {
 

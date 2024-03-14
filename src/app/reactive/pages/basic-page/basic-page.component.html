@@ -9,8 +9,7 @@
                 <label class="col-sm-3 col-form-label">Producto</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" formControlName="name" placeholder="Nombre del producto">
-                    <span *ngIf="myForm.controls['name'].getError('required') && myForm.controls['name'].touched" class="form-text text-danger">Este campo es requerido</span>
-                    <span *ngIf="myForm.controls['name'].getError('minlength') && myForm.controls['name'].touched" class="form-text text-danger">Este campo requiere mínimo 3 letras</span>
+                    <span *ngIf="isValidField('name')" class="form-text text-danger">{{ getFieldError('name') }}</span>
                 </div>
             </div>
             <!-- Campo de producto -->
@@ -18,7 +17,7 @@
                 <label class="col-sm-3 col-form-label">Precio</label>
                 <div class="col-sm-9">
                     <input type="number" class="form-control" formControlName="price" placeholder="Precio del producto">
-                    <span class="form-text text-danger">El precio debe de ser 0 o mayor</span>
+                    <span *ngIf="isValidField('price')" class="form-text text-danger">El precio debe de ser 0 o mayor</span>
                 </div>
             </div>
             <!-- Campo de existencias -->
@@ -26,7 +25,7 @@
                 <label class="col-sm-3 col-form-label">Existencias</label>
                 <div class="col-sm-9">
                     <input type="number" class="form-control" formControlName="inStorage" placeholder="Existencias del producto">
-                    <span class="form-text text-danger">Las existencias deben de ser 0 o mayor</span>
+                    <span *ngIf="isValidField('inStorage')" class="form-text text-danger">Las existencias deben de ser 0 o mayor</span>
                 </div>
             </div>
             <div class="row">

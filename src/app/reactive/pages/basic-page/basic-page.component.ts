@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+
+const defaultValues = {
+  name: 'Default Product',
+  price: 10,
+  inStorage: '5'
+}
 
 @Component({
   templateUrl: './basic-page.component.html',
   styles: [
   ]
 })
-export class BasicPageComponent {
+export class BasicPageComponent implements OnInit {
 
   public myForm: FormGroup = this.fb.group({
     name: ['', [ Validators.required, Validators.minLength(3) ]], // Camp requerit i amb un mínim de 3 lletres
@@ -20,8 +26,16 @@ export class BasicPageComponent {
     private fb: FormBuilder
   ) {}
 
+    ngOnInit(): void {
+      this.myForm.reset(defaultValues);
+    }
+
   onSave(): void {
 
     if (this.myForm.invalid) return; // Si els validadors del form son invalids, surt i no executa el save. (Aixo es la comprobació de les validacions)
+
+    console.log(this.myForm.value);
+
+    this.myForm.reset({price: 10, inStorage: 0}); // reseteja els valors a uns camps indicats aqui per paràmetre.
   }
 }

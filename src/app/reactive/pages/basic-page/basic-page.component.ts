@@ -27,12 +27,17 @@ export class BasicPageComponent implements OnInit {
   ) {}
 
     ngOnInit(): void {
-      this.myForm.reset(defaultValues);
+      // this.myForm.reset(defaultValues);
     }
 
   onSave(): void {
 
-    if (this.myForm.invalid) return; // Si els validadors del form son invalids, surt i no executa el save. (Aixo es la comprobació de les validacions)
+    if (this.myForm.invalid) {
+
+
+      this.myForm.markAllAsTouched(); // Si no es válid, ho marca tot com a 'tocat'. Així dispara les validacions.
+      return; // Si els validadors del form son invalids, surt i no executa el save. (Aixo es la comprobació de les validacions)
+    }
 
     console.log(this.myForm.value);
 

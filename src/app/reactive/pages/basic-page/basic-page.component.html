@@ -43,21 +43,27 @@
 <div class="row">
     <div class="col">
         <span>Valid</span>
-        <pre>{{ 'objeto' | json }}</pre>
+        <pre>{{ myForm.valid| json }}</pre> <!-- Si el formulari es valid -->
 
         <span>Pristine</span>
-        <pre>{{ 'objeto' | json }}</pre>
+        <pre>{{ myForm.pristine| json }}</pre> <!-- Si el formulari no s'ha tocat ni manipulat de cap forma -->
 
         <span>Touched</span>
-        <pre>{{ 'objeto' | json }}</pre>
+        <pre>{{ myForm.touched| json }}</pre> <!-- Si s'ha tocat alguna cosa -->
 
         <span>Value</span>
-        <pre>{{ 'objeto' | json }}</pre>
+        <pre>{{ myForm.value| json }}</pre> <!-- Valors del formulari -->
 
         <span>Precio</span>
-        <pre>{{ 'objeto' | json }}</pre>
+        <pre>{{ myForm.controls['price'].value | json }}</pre> <!-- Valor del price -->
+
+        <span>Precio - Errors</span>
+        <pre>{{ myForm.controls['price'].errors | json }}</pre> <!-- Si el price té errors -->
 
         <span>Producto</span>
-        <pre>{{ 'objeto' | json }}</pre>
+        <pre>{{ myForm.controls['name'].value | json }}</pre> <!-- Valor del name -->
+
+        <span>Producto - Errors</span>
+        <pre>{{ myForm.controls['name'].errors | json }}</pre> <!-- Si el name té errors -->
     </div>
 </div>
